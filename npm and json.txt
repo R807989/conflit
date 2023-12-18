@@ -1,0 +1,42 @@
+
+The error npm: command not found indicates that the Node.js environment or npm (Node Package Manager) is not available in the Jenkins agent where the build is being executed. To resolve this issue, you need to ensure that the Jenkins agent has Node.js and npm installed.
+
+Here are the steps you can take to fix this issue:
+
+Install Node.js and npm on Jenkins Agent:
+
+Depending on the operating system of your Jenkins agent, you can install Node.js and npm. If it's a Linux-based agent, you can use a package manager like apt or yum. If it's a Windows agent, you can download the installer from the Node.js website.
+
+For Ubuntu/Debian-based systems:
+
+bash
+Copy code
+sudo apt update
+sudo apt install nodejs
+sudo apt install npm
+For CentOS/RHEL-based systems:
+
+bash
+Copy code
+sudo yum install epel-release
+sudo yum install nodejs
+sudo yum install npm
+For Windows, download the installer from the Node.js website and follow the installation instructions.
+
+Configure Jenkins to Use the Correct Node.js Version:
+
+In your Jenkinsfile, you can use the tools directive to specify the Node.js version to be used in the build. Update the 'Build' stage in your Jenkinsfile as follows:
+
+groovy
+Copy code
+stage('Build') {
+    tools {
+        nodejs "NameOfYourNodeJSInstallation"
+    }
+    steps {
+        script {
+            sh 'npm install'
+            sh 'npm run build --prod'
+        }
+    }
+}

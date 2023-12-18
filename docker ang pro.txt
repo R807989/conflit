@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        // Define environment variables if needed
+        DOCKER_IMAGE = 'node:14'  // Replace with your desired Node.js version
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Install dependencies and build AngularJS project
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Dockerize') {
+            steps {
+                script {
+                    // Build Docker image and push to a registry
+                    sh "docker build -t your-docker-registry/your-angular-app:${env.BUILD_NUMBER} ."
+                    sh "docker push your-docker-registry/your-angular-app:${env.BUILD_NUMBER}"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            // Additional steps to execute on success
+            echo 'Build successful!'
+        }
+        failure {
+            // Additional steps to execute on failure
+            echo 'Build failed!'
+        }
+    }
+}

@@ -1,0 +1,20 @@
+
+To deploy the Dockerized AngularJS application, you'll need to consider where you want to deploy it. Below are two common scenarios: deploying to a standalone server and deploying to a container orchestration platform like Kubernetes.
+
+Deploying to a Standalone Server:
+SSH into Your Server:
+Access your server using SSH.
+
+Pull Docker Image:
+On your server, pull the Docker image you pushed to your Docker registry:
+
+bash
+Copy code
+docker pull your-docker-registry/your-angular-app:${BUILD_NUMBER}
+Run Docker Container:
+Run the Docker container on your server:
+
+bash
+Copy code
+docker run -d -p 80:80 your-docker-registry/your-angular-app:${BUILD_NUMBER}
+Adjust the port numbers based on how your Angular application is configured.

@@ -1,0 +1,64 @@
+Docker networking
+
+is a platform that utilizes OS-level virtual software, 
+to help users to 
+develop, deploy, manage, and run applications in a Docker Container with all their library dependencies.
+
+
+How do people use Docker
+Docker Use Cases: 15 most common ways to use Docker
+Docker is a containerization technology that enables developers to package a service into a container along with its dependencies, libraries and operating system.
+Create a Docker file and add the code.
+Build a Docker image based on the Dockerfile.
+Create a running instance from the Docker image.
+Scale containers on-demand
+
+What is container and why it is used
+
+What is a Container? | Docker
+A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.
+
+
+
+a Docker container to as many networks as  requires. 
+Docker Networks are used to provide complete isolation for Docker containers. Note: A user can add containers to more than one network.
+
+
+What is Docker Swarm vs Docker network
+Cluster nodes are connected to an overlay network to enable communication between containers running on different nodes.
+ Load balancing: Docker Swarm provides integrated load balancing to distribute requests among the containers of a service.
+
+Docker Networking
+Read
+Discuss
+Courses
+Video
+Pre-requisite: Docker 
+
+Docker Networking allows you to create a Network of Docker Containers managed by a master node called the manager. Containers inside the Docker Network can talk to each other by 
+
+Docker Networking 
+A network is a group of two or more devices that can communicate with each other either physically or virtually. 
+The Docker network is a virtual network created by Docker to enable communication between Docker containers. If two containers are running on the same host they can communicate with each other without the need for ports to be exposed to the host machine. You may use Docker to manage your Docker hosts in any platform manner, regardless of whether they run Windows, Linux, or a combination of the two.
+
+
+==================================
+
+Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. In this blog, I’ve covered an introduction to Docker Network. It allows you to attach a container to as many networks as you like. You can also attach an already running container.
+
+Note: Know more about Docker Architecture
+
+
+Docker Networking is to connect the docker container to each other and outside world 
+so they can communicate with each other also they can talk to Docker Host. 
+You can connect docker containers to non-Docker workloads. 
+Docker uses CNM Container Network Model for networking. 
+This model standardizes the steps required to provide networking for containers using multiple network drivers.
+
+
+
+============================================================
+Docker is a fantastic tool that aids in the continuous deployment process. 
+It's well-integrated with existing configuration management software. 
+Its large and developing ecosystem has a wide range of applications. 
+Docker has a lot of benefits and can help you construct containerized apps and multi-container apps.

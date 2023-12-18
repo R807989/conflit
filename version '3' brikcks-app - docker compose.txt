@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  app:
+    image: openjdk:11
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5655:5655"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/your_database_name
+      SPRING_DATASOURCE_USERNAME: your_database_username
+      SPRING_DATASOURCE_PASSWORD: your_database_password
+      SPRING_MAIL_HOST: smtp.elasticemail.com
+      SPRING_MAIL_PORT: your_mail_port
+      SPRING_MAIL_USERNAME: bharath@marolix.com
+      SPRING_MAIL_PASSWORD: your_mail_password
+      # Add other necessary environment variables
+
+  database:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+      MYSQL_DATABASE: your_database_name
+      MYSQL_USER: your_database_username
+      MYSQL_PASSWORD: your_database_password
+    ports:
+      - "3306:3306"

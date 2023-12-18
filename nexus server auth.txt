@@ -1,0 +1,13 @@
+<server>
+
+      <id>nexus-snapshot</id>
+      <username>admin</username>
+      <password>admin</password>
+      </server>
+       
+      <server>
+
+      <id>nexus-releases</id>
+      <username>admin</username>
+      <password>admin</password>
+      </server>

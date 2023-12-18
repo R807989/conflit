@@ -1,0 +1,1 @@
+aws s3 cp /path/to/local/file.txt s3://your-bucket-name/file.txt

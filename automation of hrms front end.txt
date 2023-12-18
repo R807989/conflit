@@ -1,0 +1,174 @@
+1. open instance with t2 large and install java 
+     jenkins.io
+     install git
+     install jenkins
+     start the jenkins
+
+
+2.  install docker through web 
+    a. setup repo
+      sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+
+before install configure this
+b. open this....  sudo vi /etc/yum.repos.d/docker-ce.repo
+                add with in  [docker-ce-stable]
+name=Docker CE Stable - $basearch
+baseurl=https://download.docker.com/linux/centos/$releasever/$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+c.install docker
+
+sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+d.systemctl start docker
+
+ e.add the Jenkins user to the docker group and restart Jenkins:
+
+
+sudo usermod -aG docker jenkins
+sudo systemctl restart jenkins
+Correct Permissions:
+
+Ensure that the Docker socket has appropriate permissions:
+sudo chown root:docker /var/run/docker.sock
+This command changes the ownership of the Docker socket to the root user and the docker group.
+
+Verify Permissions:
+
+chmod 777  /var/run/docker.sock/
+
+
+
+
+
+
+
+
+
+
+
+
+3.install docker plugins in jenkins server through manage jenkins----plugins 
+
+4.open jenkins and create job with pipeline....pipe line from scm --------attach jenkinsfile with in the path which is craetd in github repo
+
+
+5.install nodejs16 version
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+ nvm install 16
+  nvm use 16
+  nvm alias default 16
+node -v
+6.install angular15 version
+npm install -g @angular/cli@15
+ng version
+7.install npm 
+sudo apt install npm
+npm -v
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8. go to github and create code with name given jenkinsfile
+
+pipeline {
+agent any 
+stages{
+
+stage("git intigration") {
+steps {
+ git 'https://github.com/R807989/main-hrm.git'
+
+}
+
+}
+
+
+
+stage('Build') {
+            steps {
+ dir('hrms') {
+                script {
+                    // Install dependencies and build AngularJS project
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+}
+
+
+stage('Build Docker Image') {
+            steps {
+                dir('hrms') {
+                    script {
+                        def dockerImage = docker.build('ravi', '-f Dockerfile .')
+                        
+                    }
+                }
+            }
+        }
+
+
+
+
+stage('Deploy Docker Container') {
+    steps {
+        script {
+            // Stop and remove the existing container (if any)
+            sh 'docker stop ravi-container || true'
+            sh 'docker rm ravi-container || true'
+
+            // Run the Docker container
+            sh 'docker run -d -p 4200:4200 --name ravi-container ravi'
+        }
+    }
+}
+
+
+
+
+}
+
+
+}
+
+6.Before build go to terminal cd /var/lib/jenkins/workspace/hrms/here creaate Dockerfilr
+
+
+FROM node:16
+WORKDIR /usr/src/app/
+COPY . .
+COPY package*.json ./
+RUN npm install -g @angular/cli@15.0.0
+RUN npm install
+EXPOSE 4200
+CMD ["ng", "serve", "--host", "0.0.0.0"]
+
+
+
+
+
+
+
+7. build the entire app 
+
+8. verify iamges
+9. verify containers in up
+
+10. browse with pubip and port number

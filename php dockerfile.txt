@@ -1,0 +1,23 @@
+# Use an official PHP base image for your PHP version (e.g., PHP 7.4)
+FROM php:7.4-apache
+
+# Set the working directory
+WORKDIR /var/www/html
+
+# Copy your PHP application code into the container
+COPY . .
+
+# Install any necessary PHP extensions and dependencies
+RUN docker-php-ext-install pdo pdo_mysql
+
+# Expose port 80 (assuming your PHP application runs on port 80)
+EXPOSE 80
+
+# You can configure Apache if needed (e.g., enable mod_rewrite)
+# COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
+
+# Enable mod_rewrite if required
+# RUN a2enmod rewrite
+
+# Define the command to start Apache and serve your PHP application
+CMD ["apache2-foreground"]

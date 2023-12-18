@@ -1,0 +1,21 @@
+FROM openjdk:17
+
+
+
+WORKDIR /app
+
+
+COPY . /app
+COPY /target/Bricks99-0.0.1-SNAPSHOT.jar  /app
+
+EXPOSE 5655
+
+
+ENV DB_URL=jdbc:mysql://mysql-host:3306/bricks99
+ENV DB_USERNAME=devuser
+
+ENV DB_PASSWORD=Devuser#123
+
+
+# Run application when the container launches
+CMD ["java", "-jar", "target/Bricks99-0.0.1-SNAPSHOT.jar"]

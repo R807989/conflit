@@ -1,0 +1,19 @@
+dd the Jenkins user to the docker group and restart Jenkins:
+
+
+
+sudo usermod -aG docker jenkins
+
+sudo systemctl restart jenkins
+Correct Permissions:
+
+Ensure that the Docker socket has appropriate permissions:
+
+bash
+Copy code
+sudo chown root:docker /var/run/docker.sock
+This command changes the ownership of the Docker socket to the root user and the docker group.
+
+Verify Permissions:
+
+chmod 777  /var/run/docker.sock
